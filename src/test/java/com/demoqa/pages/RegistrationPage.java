@@ -3,6 +3,7 @@ package com.demoqa.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
+import com.demoqa.pages.components.RegistrationResultsModal;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
+    RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
     private final String TITLE_TEXT = "Practice Form";
 
     private SelenideElement
@@ -57,6 +59,16 @@ public class RegistrationPage {
         $("#dateOfBirthInput").click();
         $(".react-datepicker").shouldBe(Condition.visible);
         calendarComponent.setDate(day, month, year);
+        return this;
+    }
+
+    public RegistrationPage verifyResultModalAppears() {
+        registrationResultsModal.verifyModalAppears();
+        return this;
+    }
+
+    public RegistrationPage verifyResult(String key, String value) {
+        registrationResultsModal.verifyResult(key,value);
         return this;
     }
 }

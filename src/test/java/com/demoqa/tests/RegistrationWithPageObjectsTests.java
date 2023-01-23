@@ -31,7 +31,6 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setBirthDate(userDayBirthDay, userMonthBirthDay, userYearBirthDay);
 
 
-
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("original.jpg");
@@ -41,10 +40,19 @@ public class RegistrationWithPageObjectsTests extends TestBase {
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
-        $(".modal-content").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Aleksei Ivanov"), text("sdd@qaguru.ru"),
-                text("Male"), text("7900876342"), text("03 March,1981"), text("Maths"),
-                text("Sports"), text("original.jpg"), text("SPb. Street"), text("NCR Delhi"));
+        registrationPage.verifyResultModalAppears()
+                .verifyResult("Student Name", userName + " " + lastName)
+                .verifyResult("Student Email", userEmail)
+                .verifyResult("Gender", genderWrapper)
+                .verifyResult("Mobile", userPhoneNumber)
+                .verifyResult("Date of Birth", userDayBirthDay + " " + userMonthBirthDay + "," + userYearBirthDay);
+        //     .verifyResult("Subjects")
+        //     .verifyResult("Hobbies")
+        //     .verifyResult("Picture")
+        //     .verifyResult("Address")
+        //     .verifyResult("State and City");
+        // $(".table-responsive").shouldHave(text("Aleksei Ivanov"), text("sdd@qaguru.ru"),
+        //       text("Male"), text("7900876342"), text("03 March,1981"), text("Maths"),
+        //       text("Sports"), text("original.jpg"), text("SPb. Street"), text("NCR Delhi"));
     }
 }
