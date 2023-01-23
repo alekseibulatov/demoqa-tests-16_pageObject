@@ -23,9 +23,8 @@ public class RegistrationWithPageObjectsTests {
     void successRegistration() {
         String userName = "Aleksei";
         String lastName = "Ivanov";
-        String genderWrapper = "Male";
         String userEmail = "sdd@qaguru.ru";
-
+        String genderWrapper = "Male";
         String userPhoneNumber = "79008763421";
 
         new RegistrationPage().openPage();
@@ -33,12 +32,13 @@ public class RegistrationWithPageObjectsTests {
         new RegistrationPage().setLastName(lastName);
         new RegistrationPage().setUserEmail(userEmail);
         new RegistrationPage().setGender(genderWrapper);
+        new RegistrationPage().setPhoneNumber(userPhoneNumber);
 
 
 
 
 
-        $("#userNumber").setValue("79008763421");
+
         $("#dateOfBirthInput").click();
         $(".react-datepicker").shouldBe(Condition.visible);
         $(".react-datepicker__year-select").click();

@@ -14,7 +14,8 @@ public class RegistrationPage {
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
-            userGender = $("#genterWrapper");
+            userGender = $("#genterWrapper"),
+            userPhoneNumber = $("#userNumber");
 
     public void openPage() {
         open("/automation-practice-form");
@@ -37,5 +38,9 @@ public class RegistrationPage {
 
     public void setGender(String value) {
         userGender.$(byText(value)).click();
+    }
+
+    public void setPhoneNumber(String value) {
+        userPhoneNumber.setValue(value);
     }
 }
