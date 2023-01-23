@@ -2,11 +2,6 @@ package com.demoqa.tests;
 
 import org.junit.jupiter.api.*;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-
 
 public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
@@ -15,11 +10,16 @@ public class RegistrationWithPageObjectsTests extends TestBase {
         String lastName = "Ivanov";
         String userEmail = "sdd@qaguru.ru";
         String genderWrapper = "Male";
-        String userPhoneNumber = "79008763421";
+        String userPhoneNumber = "7900876342";
         String userDayBirthDay = "03";
         String userMonthBirthDay = "March";
         String userYearBirthDay = "1981";
-
+        String userSubjects = "Math";
+        String userHobbies = "Sports";
+        String userPictureName = "original.jpg";
+        String userAddress = "SPb. Street ";
+        String userState = "NCR";
+        String userCity = "Delhi";
 
         registrationPage.openPage()
                 .setFirstName(userName)
@@ -28,31 +28,24 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setUserEmail(userEmail)
                 .setGender(genderWrapper)
                 .setPhoneNumber(userPhoneNumber)
-                .setBirthDate(userDayBirthDay, userMonthBirthDay, userYearBirthDay);
+                .setBirthDate(userDayBirthDay, userMonthBirthDay, userYearBirthDay)
+                .setSubjectsInput(userSubjects)
+                .setHobbies(userHobbies)
+                .loadPicture(userPictureName)
+                .setCurrentAddress(userAddress)
+                .setStateAndCity(userState, userCity)
+                .clickButtonSubmit();
 
-
-        $("#subjectsInput").setValue("Math").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("original.jpg");
-        $("#currentAddress").setValue("SPb. Street ");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
         registrationPage.verifyResultModalAppears()
                 .verifyResult("Student Name", userName + " " + lastName)
                 .verifyResult("Student Email", userEmail)
                 .verifyResult("Gender", genderWrapper)
                 .verifyResult("Mobile", userPhoneNumber)
-                .verifyResult("Date of Birth", userDayBirthDay + " " + userMonthBirthDay + "," + userYearBirthDay);
-        //     .verifyResult("Subjects")
-        //     .verifyResult("Hobbies")
-        //     .verifyResult("Picture")
-        //     .verifyResult("Address")
-        //     .verifyResult("State and City");
-        // $(".table-responsive").shouldHave(text("Aleksei Ivanov"), text("sdd@qaguru.ru"),
-        //       text("Male"), text("7900876342"), text("03 March,1981"), text("Maths"),
-        //       text("Sports"), text("original.jpg"), text("SPb. Street"), text("NCR Delhi"));
+                .verifyResult("Date of Birth", userDayBirthDay + " " + userMonthBirthDay + "," + userYearBirthDay)
+                .verifyResult("Subjects", userSubjects)
+                .verifyResult("Hobbies", userHobbies)
+                .verifyResult("Picture", userPictureName)
+                .verifyResult("Address", userAddress)
+                .verifyResult("State and City", userState + " " + userCity);
     }
 }

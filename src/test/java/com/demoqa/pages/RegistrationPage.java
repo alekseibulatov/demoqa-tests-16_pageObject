@@ -1,6 +1,5 @@
 package com.demoqa.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
 import com.demoqa.pages.components.RegistrationResultsModal;
@@ -20,7 +19,16 @@ public class RegistrationPage {
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
             userGender = $("#genterWrapper"),
-            userPhoneNumber = $("#userNumber");
+            userPhoneNumber = $("#userNumber"),
+            dateOfBirthInput = $("#dateOfBirthInput"),
+            userSubjectsInput = $("#subjectsInput"),
+            userHobbiesWrapper = $("#hobbiesWrapper"),
+            userUploadPicture = $("#uploadPicture"),
+            userCurrentAddress = $("#currentAddress"),
+            userState = $("#state"),
+            userStateCityWrapper = $("#stateCity-wrapper"),
+            userCity = $("#city"),
+            userSubmit = $("#submit");
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -56,10 +64,41 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setBirthDate(String day, String month, String year) {
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker").shouldBe(Condition.visible);
+        dateOfBirthInput.click();
         calendarComponent.setDate(day, month, year);
         return this;
+    }
+
+    public RegistrationPage setSubjectsInput(String value) {
+        userSubjectsInput.setValue(value).pressEnter();
+        return this;
+    }
+
+    public RegistrationPage setHobbies(String value) {
+        userHobbiesWrapper.$(byText(value)).click();
+        return this;
+    }
+
+    public RegistrationPage loadPicture(String value) {
+        userUploadPicture.uploadFromClasspath(value);
+        return this;
+    }
+
+    public RegistrationPage setCurrentAddress(String value) {
+        userCurrentAddress.setValue(value);
+        return this;
+    }
+
+    public RegistrationPage setStateAndCity(String state, String city) {
+        userState.click();
+        userStateCityWrapper.$(byText(state)).click();
+        userCity.click();
+        userStateCityWrapper.$(byText(city)).click();
+        return this;
+    }
+
+    public void clickButtonSubmit() {
+        userSubmit.click();
     }
 
     public RegistrationPage verifyResultModalAppears() {
@@ -68,7 +107,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage verifyResult(String key, String value) {
-        registrationResultsModal.verifyResult(key,value);
+        registrationResultsModal.verifyResult(key, value);
         return this;
     }
 }
