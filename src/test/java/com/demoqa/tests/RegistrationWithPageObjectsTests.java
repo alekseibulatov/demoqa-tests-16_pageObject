@@ -1,6 +1,5 @@
 package com.demoqa.tests;
 
-import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -17,6 +16,10 @@ public class RegistrationWithPageObjectsTests extends TestBase {
         String userEmail = "sdd@qaguru.ru";
         String genderWrapper = "Male";
         String userPhoneNumber = "79008763421";
+        String userDayBirthDay = "03";
+        String userMonthBirthDay = "March";
+        String userYearBirthDay = "1981";
+
 
         registrationPage.openPage()
                 .setFirstName(userName)
@@ -24,16 +27,11 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setLastName(lastName)
                 .setUserEmail(userEmail)
                 .setGender(genderWrapper)
-                .setPhoneNumber(userPhoneNumber);
+                .setPhoneNumber(userPhoneNumber)
+                .setBirthDate(userDayBirthDay, userMonthBirthDay, userYearBirthDay);
 
 
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker").shouldBe(Condition.visible);
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__year-select").selectOption("1981");
-        $(".react-datepicker__month-select").click();
-        $(".react-datepicker__month-select").selectOption("March");
-        $(".react-datepicker__day--003:not(.react-datepicker__day--outside-month)").click();
+
         $("#subjectsInput").setValue("Math").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#uploadPicture").uploadFromClasspath("original.jpg");
