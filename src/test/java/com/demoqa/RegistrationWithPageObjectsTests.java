@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 
 public class RegistrationWithPageObjectsTests {
+    RegistrationPage registrationPage = new RegistrationPage();
+
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -27,16 +29,13 @@ public class RegistrationWithPageObjectsTests {
         String genderWrapper = "Male";
         String userPhoneNumber = "79008763421";
 
-        new RegistrationPage().openPage();
-        new RegistrationPage().setFirstName(userName);
-        new RegistrationPage().setLastName(lastName);
-        new RegistrationPage().setUserEmail(userEmail);
-        new RegistrationPage().setGender(genderWrapper);
-        new RegistrationPage().setPhoneNumber(userPhoneNumber);
-
-
-
-
+        registrationPage.openPage()
+                .setFirstName(userName)
+                .setFirstName(userName)
+                .setLastName(lastName)
+                .setUserEmail(userEmail)
+                .setGender(genderWrapper)
+                .setPhoneNumber(userPhoneNumber);
 
 
         $("#dateOfBirthInput").click();
