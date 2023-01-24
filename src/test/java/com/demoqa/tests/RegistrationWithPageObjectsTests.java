@@ -2,24 +2,11 @@ package com.demoqa.tests;
 
 import org.junit.jupiter.api.*;
 
+import static com.demoqa.tests.TestData.*;
 
 public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
     void successRegistration() {
-        String userName = "Aleksei";
-        String lastName = "Ivanov";
-        String userEmail = "sdd@qaguru.ru";
-        String genderWrapper = "Male";
-        String userPhoneNumber = "7900876342";
-        String userDayBirthDay = "03";
-        String userMonthBirthDay = "March";
-        String userYearBirthDay = "1981";
-        String userSubjects = "Math";
-        String userHobbies = "Sports";
-        String userPictureName = "original.jpg";
-        String userAddress = "SPb. Street ";
-        String userState = "NCR";
-        String userCity = "Delhi";
 
         registrationPage.openPage()
                 .setFirstName(userName)
